@@ -2,6 +2,8 @@ RevocationTestUsingCRL
 ====
 HTTPS接続時にSSLサーバ証明書が失効しているかどうかをCRLを使って検証するテスト。Android向け。
 
+[Bouncy Castle](https://www.bouncycastle.org/java.html)を使用しています。
+
 ![img01.png](img01.png)
 
 メモ
