@@ -17,15 +17,15 @@ AndroidでHttpsURLConnectionクラスを使って通信を行うと、
 
 のチェックは行われるが、revokeされているかどうかのチェックは行われない。
 
-* [https://github.com/google/conscrypt/blob/master/platform/src/main/java/org/conscrypt/TrustManagerImpl.java#L692](https://github.com/google/conscrypt/blob/master/platform/src/main/java/org/conscrypt/TrustManagerImpl.java#L692) より
+  - [https://github.com/google/conscrypt/blob/master/platform/src/main/java/org/conscrypt/TrustManagerImpl.java#L692](https://github.com/google/conscrypt/blob/master/platform/src/main/java/org/conscrypt/TrustManagerImpl.java#L692) より
 
-    // Validate the untrusted part of the chain
-    try {
-        Set<TrustAnchor> anchorSet = new HashSet<TrustAnchor>();
-        // We know that untrusted chains to the first trust anchor, only add that.
-        anchorSet.add(trustAnchorChain.get(0));
-        PKIXParameters params = new PKIXParameters(anchorSet);
-        params.setRevocationEnabled(false);       ← ここで無効にされているっぽい？
+        // Validate the untrusted part of the chain
+        try {
+            Set<TrustAnchor> anchorSet = new HashSet<TrustAnchor>();
+            // We know that untrusted chains to the first trust anchor, only add that.
+            anchorSet.add(trustAnchorChain.get(0));
+            PKIXParameters params = new PKIXParameters(anchorSet);
+            params.setRevocationEnabled(false);  // ← ここで無効にされているっぽい？
 
 [ここ](https://issuetracker.google.com/issues/36993981)とか[ここ](https://bugs.chromium.org/p/chromium/issues/detail?id=362710)などを見ていると、以下の理由でAndroidではrevokeのチェックは行わない方針？
 
